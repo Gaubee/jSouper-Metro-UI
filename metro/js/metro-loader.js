@@ -32,6 +32,9 @@ var plugins = [
     'drag-tile',
     'scroll',
     'pull',
+    'wizard',
+    'panel',
+    'tile-transform',
 
     'initiator'
 

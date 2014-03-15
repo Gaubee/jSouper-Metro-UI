@@ -15,20 +15,33 @@
                 "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"
             ],
             buttons: [
-                "Today", "Clear"
+                "Today", "Clear", "Cancel", "Help", "Prior", "Next", "Finish"
             ]
         },
         'fr': {
             months: [
-                "Janvier", "Février", "Mars", "Avril", "Peut", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre",
-                "Jan", "Fév", "Mar", "Avr", "Peu", "Jun", "Jul", "Aoû", "Sep", "Oct", "Nov", "Déc"
+                "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre",
+                "Jan", "Fév", "Mars", "Avr", "Mai", "Juin", "Juil", "Août", "Sept", "Oct", "Nov", "Déc"
             ],
             days: [
-                "Sunday", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi",
-                "Sn", "Ln", "Md", "Mc", "Ju", "Vn", "Sm"
+                "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi",
+                "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"
             ],
             buttons: [
-                "Aujourd", "Effacer"
+                "Aujourd'hui", "Effacer", "Annuler", "Aide", "Précedent", "Suivant", "Fin"
+            ]
+        },
+        'nl': {
+            months: [
+                "Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December",
+                "Jan", "Feb", "Mrt", "Apr", "Mei", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"
+            ],
+            days: [
+                "Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag",
+                "Zo", "Ma", "Di", "Wo", "Do", "Vr", "Za"
+            ],
+            buttons: [
+                "Vandaag", "Verwijderen", "Annuleren", "Hulp", "Vorige", "Volgende", "Einde"
             ]
         },
         'ua': {
@@ -41,7 +54,7 @@
                 "Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"
             ],
             buttons: [
-                "Сьогодні", "Очистити"
+                "Сьогодні", "Очистити", "Скасувати", "Допомога", "Назад", "Вперед", "Готово"
             ]
         },
         'ru': {
@@ -54,7 +67,7 @@
                 "Вс", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"
             ],
             buttons: [
-                "Сегодня", "Очистить"
+                "Сегодня", "Очистить", "Отменить", "Помощь", "Назад", "Вперед", "Готово"
             ]
         },
         /** By NoGrief (nogrief@gmail.com) */
@@ -68,7 +81,7 @@
                 "日", "一", "二", "三", "四", "五", "六"
             ],
             buttons: [
-                "今日", "清除"
+                "今日", "清除", "Cancel", "Help", "Prior", "Next", "Finish"
             ]
         },
         'it': {
@@ -81,7 +94,7 @@
                 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'
             ],
             buttons: [
-                "Oggi", "Cancella"
+                "Oggi", "Cancella", "Cancel", "Help", "Prior", "Next", "Finish"
             ]
         },
         'de': {
@@ -94,7 +107,7 @@
                 "So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"
             ],
             buttons: [
-                "Heute", "zurücksetzten"
+                "Heute", "Zurücksetzen", "Abbrechen", "Hilfe", "Früher", "Später", "Fertig"
             ]
         },
         /** By Javier Rodríguez (javier.rodriguez at fjrodriguez.com) */
@@ -108,7 +121,7 @@
                 "Do", "Lu", "Mar", "Mié", "Jue", "Vi", "Sáb"
             ],
             buttons: [
-               "Hoy", "Limpiar"
+               "Hoy", "Limpiar", "Cancel", "Help", "Prior", "Next", "Finish"
             ]
         }
     };

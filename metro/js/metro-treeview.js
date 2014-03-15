@@ -1,54 +1,48 @@
-(function($) {
+(function( $ ) {
     $.widget("metro.treeview", {
 
         version: "1.0.0",
 
         options: {
-            onNodeClick: function(node) {},
-            onNodeCollapsed: function(node) {},
-            onNodeExpanded: function(node) {}
+            onNodeClick: function(node){},
+            onNodeCollapsed: function(node){},
+            onNodeExpanded: function(node){}
         },
 
-        _create: function() {
-            var that = this,
-                element = this.element;
+        _create: function(){
+            var that = this, element = this.element;
 
-            element.find('.folded[data-role="treefold"]').hide();
+            element.find('.node.collapsed').find('ul').hide();
 
-            element.on('click', '[data-role="treenode"]', function(e) {
-                // var $this = $(this), node = $this.parent().parent("li");
-                var node = $(this);
-                console.log(node);
+            element.find('.node-toggle').on('click', function(e){
+                var $this = $(this), node = $this.parent().parent("li");
 
                 if (node.hasClass("keep-open")) return;
 
-                node.toggleClass('folded');
+                node.toggleClass('collapsed');
 
-                if (node.hasClass('folded')) {
-                    node.children('[data-role="treefold"]').fadeOut('fast');
+                if (node.hasClass('collapsed')) {
+                    node.children('ul').fadeOut('fast');
                     that.options.onNodeCollapsed(node);
                 } else {
-                    node.children('[data-role="treefold"]').fadeIn('fast');
+                    node.children('ul').fadeIn('fast');
                     that.options.onNodeExpanded(node);
                 }
 
                 that.options.onNodeClick(node);
-                //不冒泡，避免上级也有
-                return false;
-            }).on('click', '[data-role="treefold"]', function(e) { //点击展开的功能不冒泡
-                return false;
+                e.preventDefault();
+                e.stopPropagation();
             });
 
-            // element.find("a").each(function(){
-            //     var $this = $(this);
-            //     $this.css({
-            //         paddingLeft: ($this.parents("ul").length-1) * 10
-            //     });
-            // });
+            element.find("a").each(function(){
+                var $this = $(this);
+                $this.css({
+                    paddingLeft: ($this.parents("ul").length-1) * 10
+                });
+            });
 
-            element.on('click', 'a', function(e) {
-                var $this = $(this),
-                    node = $this.parent('[data-role="treefold"]');
+            element.find('a').on('click', function(e){
+                var $this = $(this), node = $this.parent('li');
                 element.find('a').removeClass('active');
                 $this.toggleClass('active');
                 that.options.onNodeClick(node);
@@ -56,12 +50,15 @@
             });
         },
 
-        _destroy: function() {
+        _destroy: function(){
 
         },
 
-        _setOption: function(key, value) {
+        _setOption: function(key, value){
             this._super('_setOption', key, value);
         }
     })
-})(jQuery);
+})( jQuery );
+
+
+

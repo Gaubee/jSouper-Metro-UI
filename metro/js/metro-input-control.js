@@ -13,7 +13,7 @@
             if (control.hasClass('text')) {
                 this.initTextInput(control, that);
             } else if (control.hasClass('password')) {
-                this.initPasswordInput();
+                this.initPasswordInput(control, that);
             } else if (control.hasClass('checkbox') || control.hasClass('radio') || control.hasClass('switch')) {
                 this.initCheckboxInput(control, that);
             } else if (control.hasClass('file')) {
@@ -26,10 +26,7 @@
 
         initFileInput: function(el, that){
             var button, input, wrapper;
-            wrapper = el.find("[type='text']");
-            if (!wrapper.length) {
-                wrapper = $("<input type='text' id='__input_file_wrapper__' readonly style='z-index: 1; cursor: default;'>");
-            }
+            wrapper = $("<input type='text' id='__input_file_wrapper__' readonly style='z-index: 1; cursor: default;'>");
             button = el.children('.btn-file');
             input = el.children('input[type="file"]');
             input.css('z-index', 0);
@@ -38,14 +35,10 @@
             //button.attr('tabindex', '-1');
             button.attr('type', 'button');
 
-            var ev = document.createEvent("HTMLEvents");
-            ev.initEvent("change", true, false);
-            textElement = wrapper[0];
             input.on('change', function(){
                 var val = $(this).val();
                 if (val != '') {
                     wrapper.val(val);
-                    textElement.dispatchEvent(ev);
                 }
             });
 
@@ -55,9 +48,11 @@
         },
 
         initTextInput: function(el, that){
-            var button, input;
+            var button = el.children('.btn-clear'),
+                input = el.children('input[type=text]');
 
-            button = el.children('.btn-clear');
+            //console.log(button.length);
+            //button = el.children('.btn-clear');
 
             if (button.length == 0) return;
 
@@ -71,12 +66,14 @@
                 input.focus();
                 that._trigger("onClear", null, el);
             });
+
+            if (!input.attr("disabled")) input.on('click', function(){$(this).focus();});
         },
 
-        initPasswordInput: function(){
-            var button = this.element.children('.btn-reveal'),
-                input = this.element.children('input[type=password]'),
-                wrapper, that = this;
+        initPasswordInput: function(el, that){
+            var button = el.children('.btn-reveal'),
+                input = el.children('input[type=password]');
+            var wrapper;
 
             if (button.length == 0) return;
 
@@ -86,29 +83,28 @@
             button.on('mousedown', function(e){
                 input.attr('type', 'text');
                 //e.preventDefault();
-                /*
-                wrapper = $('<input type="text" />');
 
-                input.hide();
-                wrapper.appendTo(that.element);
-                wrapper.val(input.val());
-
-                that._trigger("onPasswordShow", null, that.element);
-                $(this).css('display', 'block');
-                */
+//                wrapper = el.find(".__wrapper__").length == 0 ? $('<input type="text" class="__wrapper__" />') : el.find(".__wrapper__");
+//
+//                input.hide();
+//                wrapper.appendTo(that.element);
+//                wrapper.val(input.val());
+//
+//                that._trigger("onPasswordShow", null, that.element);
             });
 
-            button.on('mouseup, mouseleave', function(e){
+            button.on('mouseup, mouseleave, blur', function(e){
                 input.attr('type', 'password').focus();
                 //e.preventDefault();
-                /*
-                console.log("mouseup");
-                input.show().focus();
-                wrapper.remove();
 
-                that._trigger("onPasswordHide", null, that.element);
-                */
+
+//                input.show().focus();
+//                wrapper.remove();
+//
+//                that._trigger("onPasswordHide", null, that.element);
             });
+
+            if (!input.attr("disabled")) input.on('click', function(){$(this).focus();});
         },
 
         _destroy: function(){
@@ -167,6 +163,7 @@
                 case "search": control = this._createInputSearch(); break;
                 case "email": control = this._createInputEmail(); break;
                 case "tel": control = this._createInputTel(); break;
+				case "number": control = this._createInputNum(); break;
                 default: control = this._createInputText();
             }
 
@@ -267,95 +264,38 @@
         },
 
         _createInputSearch: function(){
-            var element = this.element;
-
-            var wrapper = $("<div/>").addClass("input-control").addClass("text");
-            var button = $("<button/>").addClass("btn-search");
-            var clone = element.clone(true);
-            var parent = element.parent();
-
-            clone.appendTo(wrapper);
-            button.appendTo(wrapper);
-
-            wrapper.insertBefore(element);
-            element.remove();
-
-            return wrapper;
+			return this._createInputVal("text", "btn-search");
+        },
+		
+		_createInputNum: function(){
+			return this._createInputVal("number", "btn-clear");
         },
 
         _createInputTel: function(){
-            var element = this.element;
-
-            var wrapper = $("<div/>").addClass("input-control").addClass("tel");
-            var button = $("<button/>").addClass("btn-clear");
-            var clone = element.clone(true);
-            var parent = element.parent();
-
-            clone.appendTo(wrapper);
-            button.appendTo(wrapper);
-
-            wrapper.insertBefore(element);
-            element.remove();
-
-            return wrapper;
+			return this._createInputVal("tel", "btn-clear");
         },
 
         _createInputEmail: function(){
-            var element = this.element;
-
-            var wrapper = $("<div/>").addClass("input-control").addClass("email");
-            var button = $("<button/>").addClass("btn-clear");
-            var clone = element.clone(true);
-            var parent = element.parent();
-
-            clone.appendTo(wrapper);
-            button.appendTo(wrapper);
-
-            wrapper.insertBefore(element);
-            element.remove();
-
-            return wrapper;
+			return this._createInputVal("email", "btn-clear");
         },
 
         _createInputText: function(){
-            var element = this.element;
-
-            var wrapper = $("<div/>").addClass("input-control").addClass("text");
-            var button = $("<button/>").addClass("btn-clear");
-            var clone = element.clone(true);
-            var parent = element.parent();
-
-            clone.appendTo(wrapper);
-            button.appendTo(wrapper);
-
-            wrapper.insertBefore(element);
-            element.remove();
-
-            return wrapper;
+			return this._createInputVal("text", "btn-clear");
         },
 
         _createInputPassword: function(){
-            var element = this.element;
-
-            var wrapper = $("<div/>").addClass("input-control").addClass("password");
-            var button = $("<button/>").addClass("btn-reveal");
-            var clone = element.clone(true);
-            var parent = element.parent();
-
-            clone.appendTo(wrapper);
-            button.appendTo(wrapper);
-
-            wrapper.insertBefore(element);
-            element.remove();
-
-            return wrapper;
+			return this._createInputVal("password", "btn-reveal");
         },
 
         _createInputFile: function(){
-            var element = this.element;
+			return this._createInputVal("file", "btn-file");
+        },
+		
+		_createInputVal: function(name, buttonName) {
+			var element = this.element;
 
-            var wrapper = $("<div/>").addClass("input-control").addClass("file");
-            var button = $("<button/>").addClass("btn-file");
+            var wrapper = $("<div/>").addClass("input-control").addClass(name);
+            var button = $("<button/>").addClass(buttonName);
             var clone = element.clone(true);
             var parent = element.parent();
 
@@ -366,7 +306,7 @@
             element.remove();
 
             return wrapper;
-        },
+		},
 
         _destroy: function(){},
 
