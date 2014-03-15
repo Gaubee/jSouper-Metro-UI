@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML模板文件</title>
+    <script type="text/javascript" src="js/lib/require.js"></script>
+    <script type="text/javascript" src="js/require.config.js"></script>
+    <script type="text/javascript">
+    /*
+     * 声明页面的依赖
+     * 就像java文件的头部需要声明import文件一样
+     * 具体库的配置都在require.config.js中
+     */
+    require([
+        //加载通用组件，并自动初始化应用程序
+        "common",
+        //加载表单控件
+        "UI.Form"
+    ], function(jSouper) {
+        console.log("页面依赖包加载完成");
+        App.set("form", {
+            checkbox: {
+                label: "单个checkbox",
+                name: "single_checkbox",
+                list: {
+                    label: "多个checkbox",
+                    name: "multiple_checkbox",
+                    items: [{
+                        label: "1"
+                    }, {
+                        label: "2"
+                    }]
+                }
+            },
+            radio: {
+                label: "单个radio",
+                name: "single_radio",
+                list: {
+                    label: "多个radio",
+                    name: "multiple_radio",
+                    items: [{
+                        label: "1"
+                    }, {
+                        label: "2"
+                    }]
+                }
+            },
+            "switch": {
+                label: "基于checkbox的switch",
+            }
+        })
+    });
+    </script>
+</head>
+
+<body class="metro">
+    <div id="jSouperApp" class="example">
+        <br>{{#> "form.checkbox","form.checkbox"}}
+        <br>{{#> "form.checkbox.list","form.checkbox.list"}}
+        <br>{{#> "form.radio","form.radio"}}
+        <br>{{#> "form.radio.list","form.radio.list"}}
+        <br>{{#> "form.switch","form.switch"}}
+        <br>{{#> "form.textarea","form.textarea"}}
+    </div>
+    <div class="example">
+        <div class="input-control switch margin10" data-role="input-control">
+            <label>Switch me
+                <input type="checkbox" checked="">
+                <span class="check"></span>
+            </label>
+        </div>
+
+        <div class="input-control switch margin10" data-role="input-control">
+            <label>
+                Switch me
+                <input type="checkbox">
+                <span class="check"></span>
+            </label>
+        </div>
+
+        <div class="input-control switch margin10" data-role="input-control">
+            <label>
+                Switch me
+                <input type="checkbox" disabled="">
+                <span class="check"></span>
+            </label>
+        </div>
+
+        <div class="input-control switch margin10" data-role="input-control">
+            <label>
+                Switch me
+                <input type="checkbox" disabled="" checked="">
+                <span class="check"></span>
+            </label>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<xmp type="template" name="form.checkbox">
+    <div class="input-control checkbox">
+        <label>
+            <input type="checkbox" name="{{name}}" />
+            <span class="check"></span>
+            {{label}}
+        </label>
+    </div>
+</xmp>
+
+<xmp type="template" name="form.checkbox.list">
+    <div class="input-control">
+        <label>{{label}}</label>
+        {{#each items}}
+        <div class="input-control checkbox">
+            <label>
+                <!-- 当前数据:$Parent => 数组数据:$Parent => 所要数据 -->
+                <input type="checkbox" name="{{$Parent.$Parent.name}}" />
+                <span class="check"></span>
+                {{label}}
+            </label>
+        </div>
+        {{/each}}
+    </div>
+</xmp>
+
+<xmp type="template" name="form.radio">
+    <div class="input-control radio default-style">
+        <label>
+            <input type="radio" name="{{name}}" />
+            <span class="check"></span>
+            {{label}}
+        </label>
+    </div>
+</xmp>
+
+<xmp type="template" name="form.radio.list">
+    <div class="input-control">
+        <label>{{label}}</label>
+        {{#each items}}
+        <div class="input-control radio default-style">
+            <label>
+                <!-- 当前数据:$Parent => 数组数据:$Parent => 所要数据 -->
+                <input type="radio" name="{{$Parent.$Parent.name}}" />
+                <span class="check"></span>
+                {{label}}
+            </label>
+        </div>
+        {{/each}}
+    </div>
+</xmp>
+
+<xmp type="template" name="form.switch">
+    <div class="input-control switch">
+        <label>
+            {{label}}
+            <input type="checkbox" />
+            <span class="check"></span>
+        </label>
+    </div>
+</xmp>
+
+<xmp type="template" name="form.textarea">
+    <div class="input-control textarea">
+        <textarea></textarea>
+    </div>
+</xmp>
