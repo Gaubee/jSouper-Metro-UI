@@ -1,3 +1,25 @@
+// Avoid `console` errors in browsers that lack a console.
+(function() {
+    var method;
+    var noop = function() {};
+    var methods = [
+        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+        'timeStamp', 'trace', 'warn'
+    ];
+    var length = methods.length;
+    var console = (window.console = window.console || {});
+
+    while (length--) {
+        method = methods[length];
+
+        // Only stub undefined methods.
+        if (!console[method]) {
+            console[method] = noop;
+        }
+    }
+}());
 (function() {
 
     /*
@@ -15,6 +37,9 @@
             "jQuery.widget": "./js/lib/jquery.widget.min",
             "jQuery.easing": "./js/lib/jquery.easing.1.3.min",
             "jQuery.mousewheel": "./js/lib/jquery.mousewheel",
+
+            //hash路由组件
+            "routie": "./js/lib/routie.min",
 
             /*
              * RequireJs 插件，这里命名决定使用前缀，如"css" => "css!"
@@ -41,6 +66,12 @@
             },
             "jQuery.mousewheel": {
                 deps: ["jQuery"]
+            },
+            "routie": window.dispatchEvent ? {} : {
+                /*
+                 * 非现代浏览器的话则加入html5 history垫片
+                 */
+                // deps: ["./js/lib/history.min.js"]
             },
             "metro": {
                 deps: ["jQuery", "jQuery.widget", "metro-core"]
@@ -88,7 +119,7 @@
         "metro-times": ["metro-global"],
         "metro-touch-handler": ["metro-global"],
         "metro-treeview": ["metro-global"],
-        "metro-explorerTree": ["metro-global"],
+        "metro-explorerTree": ["metro-global"]
     };
     /*
      * 非现代浏览器的话则加入html5shiv垫片
@@ -115,7 +146,7 @@
             "r_text!./template/form.html",
             "r_text!./template/form-input.html",
             "r_css!./metro/css/reset.css",
-            "r_css!./metro/css/forms.css",
+            "r_css!./metro/css/forms.css"
         ]
     };
     var tpl_shims;

@@ -3,9 +3,12 @@
 
 <head>
     <title>HTML模板文件</title>
-    <script type="text/javascript" src="js/lib/require.js"></script>
-    <script type="text/javascript" src="js/require.config.js"></script>
+    <script type="text/javascript" src="../js/lib/require.js"></script>
+    <script type="text/javascript" src="../js/require.config.js"></script>
     <script type="text/javascript">
+    require.config({
+        baseUrl: "../",
+    });
     /*
      * 声明页面的依赖
      * 就像java文件的头部需要声明import文件一样
